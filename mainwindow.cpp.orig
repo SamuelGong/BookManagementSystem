@@ -1,0 +1,193 @@
+#include "mainwindow.h"
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent){
+
+    setMainWindow();
+}
+
+MainWindow::~MainWindow()
+{
+
+}
+
+void MainWindow::setMainWindow(){
+
+
+    //window
+    pal = new QPalette();
+    window = new QWidget();
+    window1 = new QWidget();
+    window2 = new QWidget();
+    window3 = new QWidget();
+
+    // button
+    loginBtn = new QPushButton(tr("马上登录"));
+    registerBtn = new QPushButton(tr("我要注册"));
+    searchBtn = new QPushButton(tr("搜索"));
+    clearBtn = new QPushButton(tr("清除"));
+
+
+    registerBtn->setFlat(true);
+    loginBtn->setFlat(true);
+    registerBtn->setFixedSize(QSize(60,30));
+    loginBtn->setFixedSize(QSize(60,30));
+    registerBtn->setStyleSheet("background-color: rgb(255, 128, 64);");
+    loginBtn->setStyleSheet("background-color: rgb(255, 128, 64);");
+
+    connect(loginBtn, SIGNAL(clicked()), this, SLOT(userRegister()));
+    connect(registerBtn, SIGNAL(clicked()), this, SLOT(userLogin()));
+
+
+    //label
+    titleImage = new QLabel();
+    titleImage->resize(700,100);
+    titleImage->setPixmap(QPixmap("E:\\My universe\\university\\Career\\Qt\\Book_Management_System\\titleImage.png"));
+
+    loginLabel = new QLabel[3];
+    loginLabel[0].setText(tr("     良心软件，抢先体验！"));
+    loginLabel[1].setText(tr("账户:"));
+    loginLabel[2].setText(tr("密码:"));
+
+    //lineEdit
+    nameLine = new QLineEdit();
+    passwordLine = new QLineEdit();
+    passwordLine->setEchoMode(QLineEdit::Password);
+
+    //tabWidget
+    tab = new QTabWidget();
+    tab->addTab(window1, "书目搜索");
+    tab->addTab(window2, "借阅情况");
+    tab->addTab(window3, "入库出库");
+
+    //layout
+    gloginLayout = new QGridLayout();
+    vloginLayout = new QVBoxLayout();
+    hloginLayout = new QHBoxLayout();
+    vrightLayout = new QVBoxLayout();
+    htopLayout = new QHBoxLayout();
+    vmainLayout = new QVBoxLayout();
+
+    gloginLayout->addWidget(&loginLabel[1], 1, 1, Qt::AlignCenter);
+    gloginLayout->addWidget(nameLine, 1, 2);
+    gloginLayout->addWidget(&loginLabel[2], 2, 1, Qt::AlignCenter);
+    gloginLayout->addWidget(passwordLine, 2, 2);
+
+    hloginLayout->addWidget(loginBtn);
+    hloginLayout->addWidget(registerBtn);
+    vloginLayout->addWidget(&loginLabel[0]);
+    vloginLayout->addLayout(gloginLayout);
+    vloginLayout->addLayout(hloginLayout);
+
+    htopLayout->addWidget(titleImage);
+    htopLayout->addLayout(vloginLayout);
+
+    vmainLayout->addLayout(htopLayout);
+    vmainLayout->addWidget(tab);
+
+    //display
+    window->setLayout(vmainLayout);
+    window->setWindowTitle(tr("JZF图书管理系统"));
+    window->setFixedSize(800,600);
+
+    window->setAutoFillBackground(true);
+    QPalette p = window->palette();
+    p.setColor(QPalette::Window,QColor("white"));
+    window->setPalette(p);
+    window->show();
+
+    setWindow1();
+    setWindow2();
+    setWindow3();
+}
+
+void MainWindow::setWindow1(){
+    QString sort[22] = {QStringLiteral("A马列毛邓"),
+                        QStringLiteral("B哲学宗教"),
+                        QStringLiteral("C社科总论"),
+                        QStringLiteral("D政治法律"),
+                        QStringLiteral("E军事"),
+                        QStringLiteral("F经济"),
+                        QStringLiteral("G文科教体"),
+                        QStringLiteral("H语言文字"),
+                        QStringLiteral("I文学"),
+                        QStringLiteral("J艺术"),
+                        QStringLiteral("K历史地理"),
+                        QStringLiteral("N自科总论"),
+                        QStringLiteral("O数理化"),
+                        QStringLiteral("P天文地科"),
+                        QStringLiteral("Q生物科学"),
+                        QStringLiteral("R医药卫生"),
+                        QStringLiteral("S农业科学"),
+                        QStringLiteral("T工业技术"),
+                        QStringLiteral("U交通运输"),
+                        QStringLiteral("V航空航天"),
+                        QStringLiteral("X环境安全"),
+                        QStringLiteral("Z综合图书")};
+
+    //widget
+    image_1 = new QLabel();
+    image_1->resize(250, 120);
+    image_1->setPixmap(QPixmap("E:\\My universe\\university\\Career\\Qt\\Book_Management_System\\search.png"));
+
+    //tableWidget
+    result_1 = new QTableWidget();
+    result_1->setFixedWidth(500);
+
+    //button
+    searchBtn = new QPushButton(tr("搜索"));
+    clearBtn = new QPushButton(tr("清除"));
+
+    //comboBox
+    yearBox_1 = new QComboBox();
+    monthBox_1 = new QComboBox();
+    sortBox_1 = new QComboBox();
+
+    yearBox_1->addItem("    ");
+    for(int i = 0; i < 60; i++)
+        yearBox_1->addItem(QString::number(2017-i));
+
+    monthBox_1->addItem("    ");
+    for(int i = 1; i < 13; i++)
+        monthBox_1->addItem(QString::number(i));
+
+    sortBox_1->addItem("        ");
+    for(int i = 0; i < 22; i++)
+        sortBox_1->addItem(sort[i]);
+
+
+    //layout
+    hmainLayout_1 = new QHBoxLayout();
+    vsearchLayout_1 = new QVBoxLayout();
+    hsearchLayout_1 = new QHBoxLayout();
+    gsearchLayout_1 = new QGridLayout();
+
+    hsearchLayout_1->addWidget(searchBtn);
+    hsearchLayout_1->addWidget(clearBtn);
+
+    vsearchLayout_1->addWidget(image_1);
+    vsearchLayout_1->addLayout(gsearchLayout_1);
+    vsearchLayout_1->addLayout(hsearchLayout_1);
+
+    hmainLayout_1->addWidget(result_1);
+    hmainLayout_1->addLayout(vsearchLayout_1);
+
+    window1->setLayout(hmainLayout_1);
+    window->setAutoFillBackground(true);
+}
+
+void MainWindow::setWindow2(){
+
+}
+
+void MainWindow::setWindow3(){
+
+}
+
+void MainWindow::userLogin(){
+
+}
+
+void MainWindow::userRegister(){
+
+}
