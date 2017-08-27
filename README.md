@@ -14,8 +14,7 @@ The specific modules are described as follows:
 | Module | Functions |
 |:-|:-|
 | interface | Provide a friendly interface, including the necessary information feedback window and interface beautification elements |
-| log in | According to the reader or administrator account or password login system, does not allow illegal login |
-But also provides registered readers account function, you can set their own account name and password |
+| log in | According to the reader or administrator account or password login system, does not allow illegal login. But also provides registered readers account function, you can set their own account name and password |
 | searching | Provide a single condition or multiple conditional search in accordance with the book title, author, publisher, book category, publication time. The window will provide books on the situation and borrow the situation. When there is no search conditions, the default search for all the books. If the reader or the administrator has logged in, you can borrow the book in this interface |
 | reader information | If the reader has already logged in, the two areas will show the reader's current borrowing situation, as well as the reader's presence in the database |
 | warehouse | If the administrator is already logged in, you can delete the item, the entry, and the file-based batch entry in this module. Visitors or readers who are not logged in can also see the person in charge of each book |
