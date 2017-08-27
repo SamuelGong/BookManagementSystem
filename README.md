@@ -21,7 +21,7 @@ The specific modules are described as follows:
   
 # 3. ARCHITECTURE
 The system has the following five clear modules, all which share a connection that is like:  
-![](./images/archietecture_1.png)  
+![](./images/architecture_1.png)  
 
 # 4. USAGE
 - Log in / log out / register  
